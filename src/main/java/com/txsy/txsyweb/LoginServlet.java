@@ -12,7 +12,7 @@ import java.sql.*;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/login.html").forward(request, response);
+        request.getRequestDispatcher("/login.html").forward(request, response);
     }
 
     @Override
