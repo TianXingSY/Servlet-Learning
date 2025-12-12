@@ -64,6 +64,11 @@
     </div>
 
     <div class="form-group">
+        <label>爱好:</label>
+        <input type="text" name="hobbies" value="<%= student.getHobbies() != null ? student.getHobbies() : "" %>" />
+    </div>
+
+    <div class="form-group">
         <button type="submit" class="btn">保存修改</button>
         <a href="${pageContext.request.contextPath}/studentlist" style="margin-left: 10px;">取消</a>
     </div>

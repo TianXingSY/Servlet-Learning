@@ -62,6 +62,11 @@
     </div>
 
     <div class="form-group">
+        <label>爱好:</label>
+        <input type="text" name="hobbies" value="" />
+    </div>
+
+    <div class="form-group">
         <button type="submit" class="btn">注册</button>
         <a href="${pageContext.request.contextPath}/studentlist" style="margin-left: 10px;">取消</a>
     </div>
@@ -100,6 +105,11 @@
     <div class="form-group">
         <label>专业:</label>
         <input type="text" name="major" value="<%= student.getMajor() != null ? student.getMajor() : "" %>" />
+    </div>
+
+    <div class="form-group">
+        <label>爱好:</label>
+        <input type="text" name="hobbies" value="<%= student.getHobbies() != null ? student.getHobbies() : "" %>" />
     </div>
 
     <div class="form-group">

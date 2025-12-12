@@ -47,6 +47,7 @@
                     <th>性别</th>
                     <th>密码</th>
                     <th>专业</th>
+                    <th>爱好</th>
                     <th>修改按钮</th>
                     <th>删除按钮</th>
                 </tr>
@@ -58,6 +59,7 @@
                     <td><%= s.getSex() != null ? s.getSex() : "" %></td>
                     <td><%= s.getPwd() != null ? s.getPwd() : "" %></td>
                     <td><%= s.getMajor() != null ? s.getMajor() : "" %></td>
+                    <td><%= s.getHobbies() != null ? s.getHobbies() : "" %></td>
                     <td><a href="${pageContext.request.contextPath}/modifystu?id=<%= s.getId() %>">修改</a></td>
                     <td><a href="${pageContext.request.contextPath}/delstu?id=<%= s.getId() %>">删除</a></td>
                 </tr>

@@ -25,6 +25,7 @@
             <th>密码</th>
             <th>性别</th>
             <th>专业</th>
+            <th>爱好</th>
         </tr>
         <% for (Student student : students) { %>
         <tr>
@@ -34,6 +35,7 @@
             <td><%= student.getPwd() %></td>
             <td><%= student.getSex() %></td>
             <td><%= student.getMajor() != null ? student.getMajor() : "" %></td>
+            <td><%= student.getHobbies() != null ? student.getHobbies() : "" %></td>
         </tr>
         <% } %>
     </table>
