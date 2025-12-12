@@ -50,6 +50,10 @@ public class UpdateStudentServlet extends HttpServlet {
                             rs.getString("major"),
                             rs.getString("hobbies")
                     );
+                    
+                    // 将原始学生ID存储在session中，用于后续验证
+                    HttpSession session = request.getSession();
+                    session.setAttribute("editingStudentId", id);
                 } else {
                     error = "未找到该学生";
                 }
@@ -70,8 +74,11 @@ public class UpdateStudentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-
-        String stuNo = request.getParameter("id"); // 注意：表单中 name 应为 "id"
+        
+        // 从session中获取原始学生ID，而不是从前端获取
+        HttpSession session = request.getSession();
+        String stuNo = (String) session.getAttribute("editingStudentId");
+        
         String name = request.getParameter("name");
         String birthday = request.getParameter("birthday");
         String pwd = request.getParameter("pwd");
@@ -90,7 +97,7 @@ public class UpdateStudentServlet extends HttpServlet {
         String error = null;
 
         if (stuNo == null || stuNo.trim().isEmpty()) {
-            error = "学生ID缺失";
+            error = "学生ID缺失或会话已过期";
         } else {
             Connection conn = null;
             PreparedStatement stmt = null;
@@ -109,6 +116,8 @@ public class UpdateStudentServlet extends HttpServlet {
                 if (stmt.executeUpdate() == 0) {
                     error = "更新失败：学生不存在";
                 } else {
+                    // 更新成功后清除session中的ID
+                    session.removeAttribute("editingStudentId");
                     response.sendRedirect("/studentlist");
                     return;
                 }

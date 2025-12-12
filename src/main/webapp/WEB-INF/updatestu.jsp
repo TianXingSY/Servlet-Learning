@@ -31,7 +31,7 @@
 <form method="post" action="${pageContext.request.contextPath}/modifystu">
     <div class="form-group">
         <label>学号:</label>
-        <input type="text" name="id" value="<%= student.getId() %>" readonly />
+        <input type="text" value="<%= student.getId() %>" readonly />
     </div>
 
     <div class="form-group">

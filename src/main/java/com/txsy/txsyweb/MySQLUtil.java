@@ -9,11 +9,12 @@ public class MySQLUtil {
     private static final String PASSWORD = "mysql";
     static {
         try{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         }catch(ClassNotFoundException e){
             e.printStackTrace();
         }
     }
+
     public static Connection getConnection() throws  SQLException{
         return DriverManager.getConnection(DB_URL, USER, PASSWORD);
     }

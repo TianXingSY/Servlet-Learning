@@ -42,14 +42,9 @@ public class SearchServlet extends HttpServlet {
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, "%" + searchValue.trim() + "%");
             } else if ("id".equals(searchType)) {
-                try {
-                    int id = Integer.parseInt(searchValue.trim());
-                    String sql = "SELECT stuNo, nickName, birthday, stuPwd, sex, major, hobbies FROM student WHERE stuNo = ?";
-                    stmt = conn.prepareStatement(sql);
-                    stmt.setInt(1, id);
-                } catch (NumberFormatException e) {
-                    error = "ID 必须是数字";
-                }
+                String sql = "SELECT stuNo, nickName, birthday, stuPwd, sex, major, hobbies FROM student WHERE stuNo = ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1, searchValue.trim());
             }
 
             if (stmt != null && error == null) {
