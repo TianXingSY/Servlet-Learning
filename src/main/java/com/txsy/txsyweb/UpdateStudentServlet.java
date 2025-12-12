@@ -27,7 +27,7 @@ public class UpdateStudentServlet extends HttpServlet {
             ResultSet rs = null;
             try {
                 conn = MySQLUtil.getConnection();
-                String sql = "SELECT stuNo, nickName, birthday, stuPwd, sex FROM student WHERE stuNo = ?";
+                String sql = "SELECT stuNo, nickName, birthday, stuPwd, sex, major, hobbies FROM student WHERE stuNo = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, id);
                 rs = stmt.executeQuery();
@@ -46,7 +46,9 @@ public class UpdateStudentServlet extends HttpServlet {
                             rs.getString("nickName"),
                             rs.getString("birthday"),
                             rs.getString("stuPwd"),
-                            displaySex  // ← 这里传“男”或“女”，匹配你的 Student 类
+                            displaySex,  // ← 这里传"男"或"女"，匹配你的 Student 类
+                            rs.getString("major"),
+                            rs.getString("hobbies")
                     );
                 } else {
                     error = "未找到该学生";
@@ -73,7 +75,9 @@ public class UpdateStudentServlet extends HttpServlet {
         String name = request.getParameter("name");
         String birthday = request.getParameter("birthday");
         String pwd = request.getParameter("pwd");
-        String sexDisplay = request.getParameter("sex"); // 页面传“男”或“女”
+        String sexDisplay = request.getParameter("sex"); // 页面传"男"或"女"
+        String major = request.getParameter("major"); // 新增：专业
+        String hobbies = request.getParameter("hobbies"); // 新增：爱好
 
         // 转为数据库值
         String sexDb = null;
@@ -92,13 +96,15 @@ public class UpdateStudentServlet extends HttpServlet {
             PreparedStatement stmt = null;
             try {
                 conn = MySQLUtil.getConnection();
-                String sql = "UPDATE student SET nickName = ?, birthday = ?, stuPwd = ?, sex = ? WHERE stuNo = ?";
+                String sql = "UPDATE student SET nickName = ?, birthday = ?, stuPwd = ?, sex = ?, major = ?, hobbies = ? WHERE stuNo = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, isEmpty(name) ? null : name.trim());
                 stmt.setString(2, isEmpty(birthday) ? null : birthday);
                 stmt.setString(3, isEmpty(pwd) ? null : pwd);
                 stmt.setString(4, sexDb);
-                stmt.setString(5, stuNo);
+                stmt.setString(5, isEmpty(major) ? null : major.trim());
+                stmt.setString(6, isEmpty(hobbies) ? null : hobbies.trim());
+                stmt.setString(7, stuNo);
 
                 if (stmt.executeUpdate() == 0) {
                     error = "更新失败：学生不存在";
@@ -114,8 +120,8 @@ public class UpdateStudentServlet extends HttpServlet {
             }
         }
 
-        // 出错时回显：构造 Student，sex 用“男/女”（符合你的类）
-        Student student = new Student(stuNo, name, birthday, pwd, sexDisplay);
+        // 出错时回显：构造 Student，sex 用"男/女"（符合你的类）
+        Student student = new Student(stuNo, name, birthday, pwd, sexDisplay, major, hobbies);
         request.setAttribute("error", error);
         request.setAttribute("student", student);
         request.getRequestDispatcher("/WEB-INF/updatestu.jsp").forward(request, response);

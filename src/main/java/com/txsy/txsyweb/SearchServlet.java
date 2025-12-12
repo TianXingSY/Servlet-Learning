@@ -38,13 +38,13 @@ public class SearchServlet extends HttpServlet {
 
             if ("name".equals(searchType)) {
                 // 模糊匹配姓名
-                String sql = "SELECT stuNo, nickName, birthday, stuPwd, sex FROM student WHERE nickName LIKE ?";
+                String sql = "SELECT stuNo, nickName, birthday, stuPwd, sex, major, hobbies FROM student WHERE nickName LIKE ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, "%" + searchValue.trim() + "%");
             } else if ("id".equals(searchType)) {
                 try {
                     int id = Integer.parseInt(searchValue.trim());
-                    String sql = "SELECT stuNo, nickName, birthday, stuPwd, sex FROM student WHERE stuNo = ?";
+                    String sql = "SELECT stuNo, nickName, birthday, stuPwd, sex, major, hobbies FROM student WHERE stuNo = ?";
                     stmt = conn.prepareStatement(sql);
                     stmt.setInt(1, id);
                 } catch (NumberFormatException e) {
@@ -60,7 +60,9 @@ public class SearchServlet extends HttpServlet {
                             rs.getString("nickName"),
                             rs.getString("birthday"),
                             rs.getString("stuPwd"),
-                            rs.getString("sex")
+                            rs.getString("sex"),
+                            rs.getString("major"),
+                            rs.getString("hobbies")
                     );
                     students.add(student);
                 }

@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>修改学生信息</title>
+    <title>学生注册</title>
     <style>
         body { font-family: sans-serif; margin: 30px; }
         .form-group { margin: 12px 0; }
@@ -19,19 +19,58 @@
 </head>
 <body>
 
-<h2>修改学生信息</h2>
+<h2>学生注册</h2>
 
 <% if (error != null) { %>
 <div class="error"><%= error %></div>
 <% } %>
 
 <% if (student == null) { %>
-<p>无法加载学生信息，请返回<a href="${pageContext.request.contextPath}/studentlist">学生列表</a>。</p>
+<form method="post" action="${pageContext.request.contextPath}/reg">
+    <div class="form-group">
+        <label>学号:</label>
+        <input type="text" name="id" value="" />
+    </div>
+
+    <div class="form-group">
+        <label>昵称:</label>
+        <input type="text" name="name" value="" />
+    </div>
+
+    <div class="form-group">
+        <label>生日:</label>
+        <input type="date" name="birthday" value="" />
+    </div>
+
+    <div class="form-group">
+        <label>密码:</label>
+        <input type="password" name="pwd" value="" />
+    </div>
+
+    <div class="form-group">
+        <label>性别:</label>
+        <select name="sex">
+            <option value="">-- 请选择 --</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>专业:</label>
+        <input type="text" name="major" value="" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn">注册</button>
+        <a href="${pageContext.request.contextPath}/studentlist" style="margin-left: 10px;">取消</a>
+    </div>
+</form>
 <% } else { %>
 <form method="post" action="${pageContext.request.contextPath}/modifystu">
     <div class="form-group">
         <label>学号:</label>
-        <input type="text" name="id" value="<%= student.getId() %>" readonly />
+        <input type="text" name="id" value="<%= student.getId() != null ? student.getId() : "" %>" />
     </div>
 
     <div class="form-group">
@@ -64,7 +103,7 @@
     </div>
 
     <div class="form-group">
-        <button type="submit" class="btn">保存修改</button>
+        <button type="submit" class="btn">注册</button>
         <a href="${pageContext.request.contextPath}/studentlist" style="margin-left: 10px;">取消</a>
     </div>
 </form>

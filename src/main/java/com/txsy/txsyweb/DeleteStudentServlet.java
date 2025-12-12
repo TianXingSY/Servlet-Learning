@@ -42,7 +42,9 @@ public class DeleteStudentServlet extends HttpServlet {
                             rs.getString("nickName"),
                             rs.getString("birthday"),
                             rs.getString("stuPwd"),
-                            rs.getString("sex")
+                            rs.getString("sex"),
+                            rs.getString("major"),
+                            rs.getString("hobbies")
                     );
                     students.add(student);
 
