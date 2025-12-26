@@ -33,6 +33,7 @@ public class SearchServlet extends HttpServlet {
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
+
         try {
             conn = MySQLUtil.getConnection();
 
