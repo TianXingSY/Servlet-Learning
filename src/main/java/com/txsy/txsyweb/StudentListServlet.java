@@ -17,6 +17,13 @@ public class StudentListServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("currentUser") == null){
+            response.sendRedirect("/login");
+            return;
+        }
+        String user = session.getAttribute("currentUser").toString();
+
         List<Student> students = new ArrayList<>();
         String error = null;
 
@@ -47,6 +54,7 @@ public class StudentListServlet extends HttpServlet {
         } finally {
             MySQLUtil.close(conn, stmt, rs);
         }
+        request.setAttribute("user", user);
         request.setAttribute("students", students);
         request.setAttribute("error", error);
         request.getRequestDispatcher("/WEB-INF/student-list.jsp").forward(request, response);

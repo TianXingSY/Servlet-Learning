@@ -39,7 +39,10 @@ public class LoginServlet extends HttpServlet {
                 }
             }
             if (loginSuccess){
+                HttpSession session = request.getSession();
+                session.setAttribute("currentUser", username);
                 out.write("<script>alert('登陆成功')</script>");
+                response.sendRedirect("/studentlist");
             }else {
                 out.write("<script>alert('用户名或密码错误')</script>");
             }

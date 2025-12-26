@@ -6,6 +6,7 @@
     String searchType = (String) request.getAttribute("searchType");
     String searchValue = (String) request.getAttribute("searchValue");
     List<Student> students = (List<Student>) request.getAttribute("students");
+    String user = (String) request.getAttribute("user");
     
     // 如果没有传入参数，使用默认值
     if (searchType == null) searchType = "name";
@@ -18,7 +19,9 @@
     <title>Search Student</title>
 </head>
 <body>
-    <h2>学生搜索</h2>
+    <h1><a href="${pageContext.request.contextPath}/index" style="text-decoration: none">学生搜索</a></h1>
+    <h2>Welcome Back <%=user%></h2>
+    <a href="${pageContext.request.contextPath}/logout" style="text-decoration: none">退出登录</a>
     
     <!-- 搜索表单 -->
     <form action="/search" method="get">

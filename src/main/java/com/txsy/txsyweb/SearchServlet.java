@@ -16,12 +16,20 @@ public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
-        
+
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("currentUser") == null){
+            response.sendRedirect("/login");
+            return;
+        }
+        String user = session.getAttribute("currentUser").toString();
+
         String searchType = request.getParameter("searchType");
         String searchValue = request.getParameter("searchValue");
 
         // 如果没有参数或参数为空，直接转发到 JSP（显示空表单）
         if (searchType == null || searchValue == null || searchValue.trim().isEmpty()) {
+            request.setAttribute("user", user);
             request.getRequestDispatcher("/WEB-INF/search-result.jsp").forward(request, response);
             return;
         }
@@ -76,6 +84,7 @@ public class SearchServlet extends HttpServlet {
         request.setAttribute("searchValue", searchValue);
         request.setAttribute("students", students);
         request.setAttribute("error", error);
+        request.setAttribute("user", user);
         
         // 转发到 JSP 页面显示结果
         request.getRequestDispatcher("/WEB-INF/search-result.jsp").forward(request, response);

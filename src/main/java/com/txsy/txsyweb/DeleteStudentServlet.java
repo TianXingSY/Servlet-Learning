@@ -17,6 +17,12 @@ public class DeleteStudentServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("currentUser") == null){
+            response.sendRedirect("/login");
+            return;
+        }
+
         String id = request.getParameter("id");
         List<Student>  students = new ArrayList<>();
         String error = null;

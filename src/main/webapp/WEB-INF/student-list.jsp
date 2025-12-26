@@ -4,7 +4,7 @@
 <%
     String error = (String) request.getAttribute("error");
     List<Student> students = (List<Student>) request.getAttribute("students");
-
+    String user = (String) request.getAttribute("user");
 %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -13,10 +13,11 @@
     <title>List of Student</title>
 </head>
 <body>
-<h1>学生列表</h1>
+<h1><a href="${pageContext.request.contextPath}/index" style="text-decoration: none">学生列表</a></h1>
+<h2>Welcome Back <%=user%></h2>
+<a href="${pageContext.request.contextPath}/logout" style="text-decoration: none">退出登录</a>
 <% if (students != null || error != null) { %>
 <div style="margin-top: 20px; min-height: 50px; border-top: 1px solid #ccc; padding-top: 10px;">
-    <!-- 搜索结果 -->
     <% if (error != null) { %>
     <p style="color: red;">错误: <%= error %></p>
     <% } else if (students == null || students.isEmpty()) { %>

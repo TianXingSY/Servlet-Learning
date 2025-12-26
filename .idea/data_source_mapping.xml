@@ -2,10 +2,5 @@
 <project version="4">
   <component name="DataSourcePerFileMappings">
     <file url="file://$APPLICATION_CONFIG_DIR$/scratches/Query.sql" value="be4c00aa-040c-4624-9726-9169daf0cdb4" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/txsy/txsyweb/DeleteStudentServlet.java" value="be4c00aa-040c-4624-9726-9169daf0cdb4" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/txsy/txsyweb/SearchServlet.java" value="be4c00aa-040c-4624-9726-9169daf0cdb4" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/txsy/txsyweb/StudentListServlet.java" value="be4c00aa-040c-4624-9726-9169daf0cdb4" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/txsy/txsyweb/UpdateStudentServlet.java" value="be4c00aa-040c-4624-9726-9169daf0cdb4" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/txsy/txsyweb/regServlet.java" value="be4c00aa-040c-4624-9726-9169daf0cdb4" />
   </component>
 </project>

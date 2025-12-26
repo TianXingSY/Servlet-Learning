@@ -15,6 +15,12 @@ public class UpdateStudentServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html; charset=UTF-8");
 
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("currentUser") == null){
+            response.sendRedirect("/login");
+            return;
+        }
+
         String id = request.getParameter("id");
         Student student = null;
         String error = null;
@@ -52,7 +58,6 @@ public class UpdateStudentServlet extends HttpServlet {
                     );
                     
                     // 将原始学生ID存储在session中，用于后续验证
-                    HttpSession session = request.getSession();
                     session.setAttribute("editingStudentId", id);
                 } else {
                     error = "未找到该学生";
@@ -76,7 +81,12 @@ public class UpdateStudentServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         
         // 从session中获取原始学生ID，而不是从前端获取
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("currentUser") == null || session.getAttribute("editingStudentId") == null){
+            response.sendRedirect("/login");
+            return;
+        }
+
         String stuNo = (String) session.getAttribute("editingStudentId");
         
         String name = request.getParameter("name");
